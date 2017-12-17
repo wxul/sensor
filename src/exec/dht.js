@@ -9,12 +9,13 @@ DHT.prototype.getTemp = function() {
         var dht = exec('python ' + py_path);
         dht.stdout.on('data', function(data) {
             var d = data.match(/\(.+\)/);
+            console.log(data, d, typeof data, typeof d);
             if (d && d.length) {
                 // var str = data.split('\n').filter(e => !!e);
                 // console.log(str);
                 // var temp = str[str.length - 1];
                 // temp = temp.split(' ');
-                d = d.split(',');
+                d = d[0].split(',');
                 resolve({
                     temp: +d[1],
                     // temp_point: temp[1],
