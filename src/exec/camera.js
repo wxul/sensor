@@ -9,7 +9,7 @@ Camera.prototype.takePhoto = function() {
     return new Promise((resolve, reject) => {
         var py_path = path.resolve(__dirname, '../../py/dht11_w.py');
         var dht = exec('raspistill -q 100 -t 0 -e png -o -', {
-            maxBuffer: 10 * 1024 * 1024
+            maxBuffer: 100 * 1024 * 1024
         });
         var responseData = [];
         dht.stdout.on('data', function(data) {
