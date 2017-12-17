@@ -10,14 +10,14 @@ Camera.prototype.takePhoto = function() {
             maxBuffer: 10 * 1024 * 1024
         });
         dht.stdout.on('data', function(data) {
-            console.log(typeof data);
-            resolve(true);
+            console.log(typeof data, data);
         });
         dht.stderr.on('data', function(data) {
             reject(data);
         });
         dht.on('exit', function(code) {
             console.log('exit:', code);
+            resolve(true);
         });
     });
 };
