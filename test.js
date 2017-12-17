@@ -25,9 +25,9 @@ dht.on('exit', function(code){
   console.log('exit:', code);
 })*/
 
-var exe = require('./exec');
-var dht = exe.getDHT();
-dht.getTemp().then(e=>{
-  console.log(e);
-  console.log(`temp:${e.temp}.${e.temp_point} C`);
+var { DHT } = require('./src/exec');
+var dht = new DHT();
+dht.getTemp().then(e => {
+    console.log(e);
+    console.log(`temp:${e.temp} °C, humi:${e.humi} %`);
 });
