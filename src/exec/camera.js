@@ -3,7 +3,6 @@ var path = require('path');
 var fs = require('fs');
 
 var { dateFormat } = require('../utils');
-// var Bufffer = require('Buffer');
 
 function Camera() {}
 
@@ -17,29 +16,16 @@ Camera.prototype.takePhoto = function() {
         var dht = exec('raspistill -q 100 -t 1 -o ' + img_path, {
             maxBuffer: 10 * 1024 * 1024
         });
-        // var responseData = '';
-        dht.stdout.on('data', function(data) {
-            // console.log(typeof data, data);
-            // responseData += data;
-            // responseData.push(Buffer.from(data));
-        });
+        dht.stdout.on('data', function(data) {});
         dht.stderr.on('data', function(data) {
             reject(data);
         });
         dht.on('exit', function(code) {
-            // console.log('exit:', code);
-            // var finalData = Buffer.from(responseData);
-            // fs.writeFile(
-            //     path.resolve(__dirname, '../../test.png'),
-            //     responseData,
-            //     e => {
-            //         console.log(e);
-            //     }
-            // );
-            fs.stat(img_path, (err, stats) => {
-                console.log(stats);
-                resolve(true);
-            });
+            // fs.stat(img_path, (err, stats) => {
+            //     console.log(stats);
+            //     resolve(true);
+            // });
+            resolve(true);
         });
     });
 };
