@@ -9,19 +9,20 @@ Camera.prototype.takePhoto = function() {
     return new Promise((resolve, reject) => {
         var py_path = path.resolve(__dirname, '../../py/dht11_w.py');
         var dht = exec('raspistill -q 100 -t 1 -o -', {
-            maxBuffer: 100 * 1024 * 1024
+            maxBuffer: 10 * 1024 * 1024
         });
-        var responseData = [];
+        var responseData = '';
         dht.stdout.on('data', function(data) {
             // console.log(typeof data, data);
-            responseData.push(Buffer.from(data));
+            responseData += data;
+            // responseData.push(Buffer.from(data));
         });
         dht.stderr.on('data', function(data) {
             reject(data);
         });
         dht.on('exit', function(code) {
             // console.log('exit:', code);
-            var finalData = Buffer.concat(responseData);
+            var finalData = Buffer.from(responseData);
             fs.writeFile(
                 path.resolve(__dirname, '../../test.png'),
                 finalData,
