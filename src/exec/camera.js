@@ -11,7 +11,7 @@ Camera.prototype.takePhoto = function() {
     return new Promise((resolve, reject) => {
         var img_path = path.resolve(
             __dirname,
-            `../../images/${dateFormat(new Date(), 'yyyyMMdd_HHmmss')}.png`
+            `../../data/images/${dateFormat(new Date(), 'yyyyMMdd_HHmmss')}.png`
         );
         console.log(img_path, 'raspistill -q 100 -t 1 -o ' + img_path);
         var dht = exec('raspistill -q 100 -t 1 -o ' + img_path, {
