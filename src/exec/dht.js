@@ -1,10 +1,12 @@
 var exec = require('child_process').exec;
+var path = require('path');
 
 function DHT() {}
 
 DHT.prototype.getTemp = function() {
     return new Promise((resolve, reject) => {
-        var dht = exec('python dht11_w.py');
+        var py_path = path.resolve(__dirname, '../../py/dht11_w.py');
+        var dht = exec('python ' + py_path);
         dht.stdout.on('data', function(data) {
             var d = data.match(/\(.+\)/);
             if (d && d.length) {
