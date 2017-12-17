@@ -25,7 +25,7 @@ Camera.prototype.takePhoto = function() {
             var finalData = Buffer.from(responseData);
             fs.writeFile(
                 path.resolve(__dirname, '../../test.png'),
-                finalData,
+                responseData,
                 e => {
                     console.log(e);
                 }
