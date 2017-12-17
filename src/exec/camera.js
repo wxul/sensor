@@ -13,7 +13,7 @@ Camera.prototype.takePhoto = function() {
             __dirname,
             `../../data/images/${dateFormat(new Date(), 'yyyyMMdd_HHmmss')}.png`
         );
-        console.log(img_path, 'raspistill -q 100 -t 1 -o ' + img_path);
+        // console.log(img_path, 'raspistill -q 100 -t 1 -o ' + img_path);
         var dht = exec('raspistill -q 100 -t 1 -o ' + img_path, {
             maxBuffer: 10 * 1024 * 1024
         });
@@ -36,10 +36,10 @@ Camera.prototype.takePhoto = function() {
             //         console.log(e);
             //     }
             // );
-            fs.stat(img_path, e => {
-                console.log(e);
+            fs.stat(img_path, (err, stats) => {
+                console.log(stats);
+                resolve(true);
             });
-            resolve(true);
         });
     });
 };
