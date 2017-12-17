@@ -25,9 +25,14 @@ dht.on('exit', function(code){
   console.log('exit:', code);
 })*/
 
-var { DHT } = require('./src/exec');
-var dht = new DHT();
-dht.getTemp().then(e => {
-    console.log(e);
-    console.log(`temp:${e.temp} °C, humi:${e.humi} %`);
+var { DHT, Camera } = require('./src/exec');
+// var dht = new DHT();
+// dht.getTemp().then(e => {
+//     // console.log(e);
+//     console.log(`temp:${e.temp} °C, humi:${e.humi} %`);
+// });
+
+var camera = new Camera();
+camera.takePhoto().then(result => {
+    console.log(result);
 });

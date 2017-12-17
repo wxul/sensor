@@ -1,3 +1,4 @@
 var DHT = require('./dht');
+var Camera = require('./camera');
 
-module.exports = { DHT };
+module.exports = { DHT, Camera };

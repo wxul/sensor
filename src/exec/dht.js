@@ -9,7 +9,7 @@ DHT.prototype.getTemp = function() {
         var dht = exec('python ' + py_path);
         dht.stdout.on('data', function(data) {
             var d = data.match(/\(.+\)/);
-            console.log(data, d, typeof data, typeof d);
+            // console.log(data, d, typeof data, typeof d);
             if (d && d.length) {
                 // var str = data.split('\n').filter(e => !!e);
                 // console.log(str);
