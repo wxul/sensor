@@ -1,17 +1,21 @@
 {
-  "name": "sensor",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "axios": "^0.17.1",
-    "body-parser": "^1.18.2",
-    "express": "^4.16.2",
-    "rpio": "^0.9.19"
-  }
+    "name": "sensor",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "listen": "node src/listen.js",
+        "web": "",
+        "createdb": "node scripts/createdb.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "axios": "^0.17.1",
+        "body-parser": "^1.18.2",
+        "express": "^4.16.2",
+        "knex": "^0.14.2",
+        "serialport": "^6.0.4",
+        "sqlite3": "^3.1.13"
+    }
 }

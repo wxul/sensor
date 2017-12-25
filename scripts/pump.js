@@ -1,5 +1,7 @@
 var rpio = require('rpio');
 
+if (!rpio) throw new Error('rpio is required!!!');
+
 var pin1 = 38;
 var pin2 = 40;
 
