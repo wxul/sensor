@@ -1,6 +1,6 @@
 (function(global) {
     // 基于准备好的dom，初始化echarts实例
-    var myChart = echarts.init(document.getElementById('main'));
+    var myChart = echarts.init(document.getElementById('dht'));
 
     axios.get('/api/v1/sensor/dht/month').then(result => {
         console.log(result);
@@ -68,11 +68,6 @@
                 },
                 yAxis: [
                     {
-                        name: '温度(℃)',
-                        type: 'value',
-                        max: 70
-                    },
-                    {
                         name: '湿度(%)',
                         type: 'value',
                         max: 100
@@ -81,6 +76,11 @@
                         //         return -v;
                         //     }
                         // }
+                    },
+                    {
+                        name: '温度(℃)',
+                        type: 'value',
+                        max: 70
                     }
                 ],
                 series: [
@@ -100,6 +100,90 @@
 
             // 使用刚指定的配置项和数据显示图表。
             myChart.setOption(option);
+        }
+    });
+
+    var myChart2 = echarts.init(document.getElementById('pm'));
+
+    axios.get('/api/v1/sensor/pm/month').then(result => {
+        console.log(result);
+        if (result.status == 200 && result.data) {
+            var time = result.data.map(e => {
+                return new Date(e.createtime).toLocaleString();
+                // return e.createtime;
+            });
+            var value = result.data.map(e => {
+                return e.value;
+            });
+            // console.log(data);
+            // 指定图表的配置项和数据
+            var option = {
+                title: {
+                    text: '灰尘传感器',
+                    // subtext: '数据来自西安兰特水电测控技术有限公司',
+                    x: 'center'
+                },
+                tooltip: {
+                    trigger: 'axis',
+                    formatter: function(params) {
+                        return (
+                            params[0].name +
+                            '<br/>' +
+                            params[0].seriesName +
+                            ' : ' +
+                            params[0].value +
+                            ' '
+                        );
+                    }
+                },
+                legend: {
+                    data: ['PM'],
+                    x: 'left'
+                },
+                // toolbox: {
+                //     show: true,
+                //     feature: {
+                //         mark: { show: true },
+                //         dataView: { show: true, readOnly: false },
+                //         magicType: { show: true, type: ['line', 'bar'] },
+                //         restore: { show: true },
+                //         saveAsImage: { show: true }
+                //     }
+                // },
+                // dataZoom: {
+                //     show: true,
+                //     realtime: true,
+                //     start: 0,
+                //     end: 100
+                // },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    axisLine: { onZero: false },
+                    data: time
+                },
+                yAxis: [
+                    {
+                        name: 'PM',
+                        type: 'value'
+                        // axisLabel: {
+                        //     formatter: function(v) {
+                        //         return -v;
+                        //     }
+                        // }
+                    }
+                ],
+                series: [
+                    {
+                        name: 'PM',
+                        type: 'line',
+                        data: value
+                    }
+                ]
+            };
+
+            // 使用刚指定的配置项和数据显示图表。
+            myChart2.setOption(option);
         }
     });
 })(this);
