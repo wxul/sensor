@@ -7,6 +7,7 @@ const DhtService = require('./DhtService');
 router.post('/set', DhtService.set);
 
 // 获取dht数据
+router.get('/today', DhtService.getData);
 router.get('/day', DhtService.getDataByDay);
 router.get('/week', DhtService.getDataByWeek);
 router.get('/month', DhtService.getDataByMonth);
