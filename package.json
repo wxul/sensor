@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "listen": "node src/listen.js",
-        "web": "node web/index",
+        "web": "node web/index.js",
         "createdb": "node scripts/createdb.js"
     },
     "author": "",
