@@ -22,8 +22,10 @@ app.use(function(req, res, next) {
     next(err);
 });
 
+const PORT = 8088;
 const server = http.createServer(app);
-server.listen(8088);
+server.listen(PORT);
+console.log('server is listening on port : ' + PORT);
 server.on('error', err => {
     console.log(err);
     process.exit(1);
