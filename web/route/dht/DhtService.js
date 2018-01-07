@@ -54,5 +54,17 @@ module.exports = {
                 res.status(500).json(err);
             });
         // res.end('getDataByMonth');
+    },
+    getDataByLimit: (req, res) => {
+        var limit = ~~req.query.last || 1000;
+        knex('dht')
+            .orderBy('id', 'desc')
+            .limit(limit)
+            .then(e => {
+                res.status(200).json((e || []).reverse());
+            })
+            .catch(err => {
+                res.status(500).json(err);
+            });
     }
 };

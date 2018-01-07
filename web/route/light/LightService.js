@@ -5,7 +5,7 @@ module.exports = {
     getData: (req, res) => {
         var begin = dateUtil.getDayBegin();
         var end = new Date();
-        knex('pm')
+        knex('light')
             .whereBetween('createtime', [begin, end])
             .then(e => {
                 console.log(e);
@@ -22,7 +22,7 @@ module.exports = {
         var begin = new Date(year, month, day, 0, 0, 0, 0);
         var end = new Date(year, month, day + 1, 0, 0, 0, 0);
 
-        knex('pm')
+        knex('light')
             .whereBetween('createtime', [begin, end])
             .then(e => {
                 res.status(200).json(e);
@@ -42,7 +42,7 @@ module.exports = {
 
         var begin = new Date(year, month, 1, 0, 0, 0, 0);
         var end = new Date(year, month + 1, 1, 0, 0, 0, 0);
-        knex('pm')
+        knex('light')
             .whereBetween('createtime', [begin, end])
             .then(e => {
                 res.status(200).json(e);
@@ -54,7 +54,7 @@ module.exports = {
     },
     getDataByLimit: (req, res) => {
         var limit = ~~req.query.last || 1000;
-        knex('pm')
+        knex('light')
             .orderBy('id', 'desc')
             .limit(limit)
             .then(e => {

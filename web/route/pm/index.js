@@ -8,5 +8,6 @@ router.get('/today', PMService.getData);
 router.get('/day', PMService.getDataByDay);
 router.get('/week', PMService.getDataByWeek);
 router.get('/month', PMService.getDataByMonth);
+router.get('/last', PMService.getDataByLimit);
 
 module.exports = router;

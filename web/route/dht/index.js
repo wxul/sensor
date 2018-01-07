@@ -11,5 +11,6 @@ router.get('/today', DhtService.getData);
 router.get('/day', DhtService.getDataByDay);
 router.get('/week', DhtService.getDataByWeek);
 router.get('/month', DhtService.getDataByMonth);
+router.get('/last', DhtService.getDataByLimit);
 
 module.exports = router;
