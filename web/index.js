@@ -9,6 +9,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/chats', express.static(path.join(__dirname, './html')));
+app.use('/live', express.static(path.join(__dirname, './live')));
 
 app.get('/', function(req, res) {
     res.redirect('/chats/');
