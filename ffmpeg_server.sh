@@ -1,2 +1,2 @@
 #!/bin/sh
-ffserver -f ffserver.conf
+ffserver -d -f ffserver.conf
