@@ -42,15 +42,15 @@ function parseData(data) {
                     db.insertLight(obj.value.voltage, 5 - obj.value.voltage);
 
                     // light
-                    try {
-                        var light = require('../scripts/light');
-                        var v = 5 - obj.value.voltage;
-                        if (v > 2) {
-                            light.turnOff();
-                        } else {
-                            light.turnOn();
-                        }
-                    } catch (error) {}
+                    // try {
+                    //     var light = require('../scripts/light');
+                    //     var v = 5 - obj.value.voltage;
+                    //     if (v > 2) {
+                    //         light.turnOff();
+                    //     } else {
+                    //         light.turnOn();
+                    //     }
+                    // } catch (error) {}
                     break;
                 // case 'distance':
                 //     db.insertDHT(obj.Humidity, obj.Temperature);
