@@ -147,24 +147,29 @@
             // })
 
             var btn2 = document.querySelector('#btn2');
+            var pending = false;
             btn2.addEventListener('click', function () {
+                if (pending) return;
+                pending = true;
                 btn2.classList.add('disable');
                 fetch('/api/v1/sensor/s/light').then(result => {
                     var last = 60;
-                    btn.innerHTML = `开灯(${last})`;
+                    btn2.innerHTML = `开灯(${last})`;
                     var timer = setInterval(() => {
                         if (last <= 0) {
                             clearInterval(timer);
                             timer = null;
-                            btn.innerHTML = '开灯';
+                            btn2.innerHTML = '开灯';
                             btn2.classList.remove('disable');
+                            pending = false;
                         } else {
                             last--;
-                            btn.innerHTML = `开灯(${last})`;
+                            btn2.innerHTML = `开灯(${last})`;
                         }
                     }, 1000);
                 }).catch(e => {
                     console.log(e);
+                    pending = false;
                     btn2.classList.remove('disable');
                 });
                 // axios.get('').then(console.log);
