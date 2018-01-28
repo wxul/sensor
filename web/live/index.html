@@ -38,7 +38,8 @@
             color: #fff;
             padding: 6px 10px;
         }
-        .button2{
+
+        .button2 {
             box-sizing: border-box;
             width: 100%;
             margin-top: 10px;
@@ -47,13 +48,17 @@
             text-align: center;
             padding: 12px 10px;
         }
+
+        .button2.disable {
+            color: #ccc;
+        }
     </style>
 </head>
 
 <body>
-    <div class="button" id="btn">
+    <!-- <div class="button" id="btn">
         开灯
-    </div>
+    </div> -->
     <!-- <canvas id="canvas"></canvas> -->
     <!-- <video id="my-live" class="video-js vjs-default-skin" controls x5-video-player-type="h5" x5-video-player-fullscreen="true"
         webkit-playsinline playsinline x5-video-orientation="portrait"> -->
@@ -143,7 +148,25 @@
 
             var btn2 = document.querySelector('#btn2');
             btn2.addEventListener('click', function () {
-                fetch('/api/v1/sensor/s/light');
+                btn2.classList.add('disable');
+                fetch('/api/v1/sensor/s/light').then(result => {
+                    var last = 60;
+                    btn.innerHTML = `开灯(${last})`;
+                    var timer = setInterval(() => {
+                        if (last <= 0) {
+                            clearInterval(timer);
+                            timer = null;
+                            btn.innerHTML = '开灯';
+                            btn2.classList.remove('disable');
+                        } else {
+                            last--;
+                            btn.innerHTML = `开灯(${last})`;
+                        }
+                    }, 1000);
+                }).catch(e => {
+                    console.log(e);
+                    btn2.classList.remove('disable');
+                });
                 // axios.get('').then(console.log);
             })
         })()
