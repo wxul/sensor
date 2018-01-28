@@ -45,7 +45,9 @@
     <div class="button" id="btn">
         开灯
     </div>
-    <video id="my-live" class="video-js vjs-default-skin" controls>
+    <!-- <canvas id="canvas"></canvas> -->
+    <video id="my-live" class="video-js vjs-default-skin" controls x5-video-player-type="h5" x5-video-player-fullscreen="true"
+        webkit-playsinline playsinline x5-video-orientation="portrait">
         <source src="http://ddns.ooxx.ga:8096/hls/camera.m3u8" type="application/x-mpegURL">
     </video>
 
@@ -55,15 +57,74 @@
         var player = videojs('my-live', {
             controls: true,
             autoplay: true
+        }, function () {
+            // $("").append('<button class="vjs-control " id="danmu_send_opt"><u>按钮1</u></button>');
+            // console.log(document.querySelector('.vjs-control-bar'));
+            // var newbtn = document.createElement('btn');
+            // newbtn.innerHTML = '<button class="vjs-control" id="lightBtn">灯</button>';
+            // var controlBar = document.getElementsByClassName('vjs-control-bar')[0];
+            // insertBeforeNode = document.getElementsByClassName('vjs-fullscreen-control')[0];
+            // controlBar.insertBefore(newbtn, insertBeforeNode);
         });
         player.play();
+
+        //获取video
+        // var oLiveVideo = document.querySelector("#my-live video");
+        // console.log(oLiveVideo);
+
+        // //获取canvas画布
+        // var oLiveCanvas = document.getElementById("canvas");
+
+        // //设置画布
+        // var oLiveCanvas2D = oLiveCanvas.getContext('2d');
+
+        // //设置setinterval定时器
+        // var bLiveVideoTimer = null;
+
+        // //监听播放
+        // oLiveVideo.addEventListener('play', function () {
+        //     console.log('play');
+        //     bLiveVideoTimer = setInterval(function () {
+        //         oLiveCanvas2D.drawImage(myPlayer, 0, 0, 640, 320);
+        //     }, 20);
+        // }, false);
+
+        // //监听暂停
+        // oLiveVideo.addEventListener('pause', function () {
+        //     clearInterval(bLiveVideoTimer);
+        // }, false);
+
+        // //监听结束
+        // oLiveVideo.addEventListener('ended', function () {
+        //     clearInterval(bLiveVideoTimer);
+        // }, false);
+        // function addDanmaBtn(player) {
+        //     var Dan = videojs.getComponent('Button');
+        //     var DanButton = videojs.extend(Dan, {
+        //         constructor: function () {
+        //             Dan.apply(this, arguments);
+        //             this.controlText('弹幕');
+        //         },
+        //         buildCSSClass: function () {
+        //             return 'icon-danmaku vjs-control vjs-button';
+        //         },
+        //         handleClick: function () {
+        //             console.log('click!!');
+        //         }
+        //     });
+        //     videojs.registerComponent('DanButton', DanButton);
+        //     player.getChild('controlBar').addChild('DanButton', {}, 3);
+        // }
+
+        // addDanmaBtn(player);
     </script>
-    <script src="//cdn.bootcss.com/axios/0.17.1/axios.min.js"></script>
+    <!-- <script src="//cdn.bootcss.com/axios/0.17.1/axios.min.js"></script> -->
     <script>
         (function () {
             var btn = document.querySelector('#btn');
             btn.addEventListener('click', function () {
-                axios.get('/api/v1/sensor/s/light').then(console.log);
+                fetch('/api/v1/sensor/s/light');
+                // axios.get('').then(console.log);
             })
         })()
     </script>
