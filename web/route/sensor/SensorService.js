@@ -10,6 +10,7 @@ module.exports = {
     },
     pump: (req, res) => {
         var k = req.query.key;
+        console.log(k, pump_key);
         if (k == pump_key) {
             setImmediate(pump.begin);
         }
