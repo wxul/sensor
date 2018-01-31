@@ -9,7 +9,7 @@ module.exports = {
         res.end('success');
     },
     pump: (req, res) => {
-        var k = req.query.key;
+        var k = req.query.k || '';
         console.log(k, pump_key);
         if (k == pump_key) {
             setImmediate(pump.begin);
